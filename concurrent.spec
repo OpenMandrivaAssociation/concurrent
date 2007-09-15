@@ -34,7 +34,7 @@
 
 Name:           concurrent
 Version:        1.3.4
-Release:        %mkrel 5.1.1
+Release:        %mkrel 5.1.2
 Epoch:          0
 Summary:        Utility classes for concurrent Java programming
 License:        Public Domain
@@ -50,8 +50,6 @@ BuildRequires:  jpackage-utils >= 0:1.5, ant
 
 %if %{gcj_support}
 BuildRequires:       java-gcj-compat-devel
-Requires(post):      java-gcj-compat
-Requires(postun):    java-gcj-compat
 %endif
 
 %description 
