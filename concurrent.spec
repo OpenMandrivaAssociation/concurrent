@@ -40,6 +40,7 @@ Summary:        Utility classes for concurrent Java programming
 License:        Public Domain
 Source0:        http://gee.cs.oswego.edu/dl/classes/EDU/oswego/cs/dl/current/concurrent.tar.gz
 Source1:        %{name}-%{version}.build.xml
+Patch0:         concurrent-build.patch
 URL:            http://gee.cs.oswego.edu/dl/classes/EDU/oswego/cs/dl/util/concurrent/intro.html
 Group:          Development/Java
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root
@@ -56,7 +57,10 @@ BuildRequires:       java-gcj-compat-devel
 This package provides standardized, efficient versions of utility classes
 commonly encountered in concurrent Java programming. This code consists of
 implementations of ideas that have been around for ages, and is merely intended
-to save you the trouble of coding them.
+to save you the trouble of coding them. Discussions of the rationale and
+applications of several of these classes can be found in the second edition of
+Concurrent Programming in Java.
+
 
 %package javadoc
 Summary:        Javadoc for %{name}
@@ -69,22 +73,30 @@ Javadoc for %{name}.
 %setup -c -q
 mkdir -p src/EDU/oswego/cs/dl/util
 mv concurrent src/EDU/oswego/cs/dl/util
-cp -pr %{SOURCE1} build.xml
-sed -i -e 's/..\/sun-u.c.license.pdf/http:\/\/gee.cs.oswego.edu\/dl\/classes\/EDU\/oswego\/cs\/dl\/util\/sun-u.c.license.pdf/' src/EDU/oswego/cs/dl/util/concurrent/intro.html
+# Build with debug on
+pushd src/EDU/oswego/cs/dl/util/concurrent
+%patch0
+popd
+
 
 %build
+pushd src/EDU/oswego/cs/dl/util/concurrent
+
 %{ant} \
   -Dversion=%{version} \
   -Dj2se.apiurl=%{_javadocdir}/java \
-  jar javadoc
+  dist javadoc
+
+popd
 
 %install
 rm -fr $RPM_BUILD_ROOT
 install -d -m 755 $RPM_BUILD_ROOT%{_javadir}
-install -m 644 %{name}-%{version}.jar $RPM_BUILD_ROOT%{_javadir}/
+install -m 644 src/EDU/oswego/cs/dl/util/concurrent/lib/%{name}.jar \
+               $RPM_BUILD_ROOT%{_javadir}/%{name}-%{version}.jar
 ln -s %{name}-%{version}.jar $RPM_BUILD_ROOT%{_javadir}/%{name}.jar
 install -d -m 755 $RPM_BUILD_ROOT%{_javadocdir}/%{name}-%{version}
-cp -pr docs/* $RPM_BUILD_ROOT%{_javadocdir}/%{name}-%{version}
+cp -pr src/EDU/oswego/cs/dl/util/concurrent/docs/* $RPM_BUILD_ROOT%{_javadocdir}/%{name}-%{version}
 ln -s %{name}-%{version} $RPM_BUILD_ROOT%{_javadocdir}/%{name}
 
 %if %{gcj_support}
