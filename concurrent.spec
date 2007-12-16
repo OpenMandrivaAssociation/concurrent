@@ -34,7 +34,7 @@
 
 Name:           concurrent
 Version:        1.3.4
-Release:        %mkrel 7.0.1
+Release:        %mkrel 7.0.2
 Epoch:          0
 Summary:        Utility classes for concurrent Java programming
 License:        Public Domain
@@ -47,7 +47,7 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root
 %if ! %{gcj_support}
 BuildArch:      noarch
 %endif
-BuildRequires:  jpackage-utils >= 0:1.5, ant
+BuildRequires:  java-rpmbuild >= 0:1.5, ant
 
 %if %{gcj_support}
 BuildRequires:       java-gcj-compat-devel
