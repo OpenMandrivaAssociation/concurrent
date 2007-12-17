@@ -43,7 +43,6 @@ Source1:        %{name}-%{version}.build.xml
 Patch0:         concurrent-build.patch
 URL:            http://gee.cs.oswego.edu/dl/classes/EDU/oswego/cs/dl/util/concurrent/intro.html
 Group:          Development/Java
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root
 %if ! %{gcj_support}
 BuildArch:      noarch
 %endif
