@@ -34,7 +34,7 @@
 
 Name:           concurrent
 Version:        1.3.4
-Release:        %mkrel 7.0.3
+Release:        %mkrel 7.0.4
 Epoch:          0
 Summary:        Utility classes for concurrent Java programming
 License:        Public Domain
