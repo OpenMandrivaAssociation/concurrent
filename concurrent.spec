@@ -34,7 +34,7 @@
 
 Name:           concurrent
 Version:        1.3.4
-Release:        %mkrel 7.0.7
+Release:        %mkrel 7.0.9
 Epoch:          0
 Summary:        Utility classes for concurrent Java programming
 License:        Public Domain
@@ -90,21 +90,21 @@ pushd src/EDU/oswego/cs/dl/util/concurrent
 popd
 
 %install
-rm -fr %{buildroot}
-install -d -m 755 %{buildroot}%{_javadir}
+rm -fr $RPM_BUILD_ROOT
+install -d -m 755 $RPM_BUILD_ROOT%{_javadir}
 install -m 644 src/EDU/oswego/cs/dl/util/concurrent/lib/%{name}.jar \
-               %{buildroot}%{_javadir}/%{name}-%{version}.jar
-ln -s %{name}-%{version}.jar %{buildroot}%{_javadir}/%{name}.jar
-install -d -m 755 %{buildroot}%{_javadocdir}/%{name}-%{version}
-cp -pr src/EDU/oswego/cs/dl/util/concurrent/docs/* %{buildroot}%{_javadocdir}/%{name}-%{version}
-ln -s %{name}-%{version} %{buildroot}%{_javadocdir}/%{name}
+               $RPM_BUILD_ROOT%{_javadir}/%{name}-%{version}.jar
+ln -s %{name}-%{version}.jar $RPM_BUILD_ROOT%{_javadir}/%{name}.jar
+install -d -m 755 $RPM_BUILD_ROOT%{_javadocdir}/%{name}-%{version}
+cp -pr src/EDU/oswego/cs/dl/util/concurrent/docs/* $RPM_BUILD_ROOT%{_javadocdir}/%{name}-%{version}
+ln -s %{name}-%{version} $RPM_BUILD_ROOT%{_javadocdir}/%{name}
 
 %if %{gcj_support}
 %{_bindir}/aot-compile-rpm
 %endif
 
 %clean
-rm -rf %{buildroot}
+rm -rf $RPM_BUILD_ROOT
 
 %if %{gcj_support}
 %post
@@ -127,3 +127,93 @@ rm -rf %{buildroot}
 %defattr(0644,root,root,0755)
 %doc %{_javadocdir}/%{name}-%{version}
 %doc %{_javadocdir}/%{name}
+
+
+%changelog
+* Tue May 03 2011 Oden Eriksson <oeriksson@mandriva.com> 0:1.3.4-7.0.7mdv2011.0
++ Revision: 663397
+- mass rebuild
+
+* Tue Nov 30 2010 Oden Eriksson <oeriksson@mandriva.com> 0:1.3.4-7.0.6mdv2011.0
++ Revision: 603850
+- rebuild
+
+* Tue Mar 16 2010 Oden Eriksson <oeriksson@mandriva.com> 0:1.3.4-7.0.5mdv2010.1
++ Revision: 522403
+- rebuilt for 2010.1
+
+* Sun Aug 09 2009 Oden Eriksson <oeriksson@mandriva.com> 0:1.3.4-7.0.4mdv2010.0
++ Revision: 413267
+- rebuild
+
+* Sat Mar 07 2009 Antoine Ginies <aginies@mandriva.com> 0:1.3.4-7.0.3mdv2009.1
++ Revision: 350738
+- rebuild
+
+* Fri Dec 21 2007 Olivier Blin <oblin@mandriva.com> 0:1.3.4-7.0.2mdv2009.0
++ Revision: 136335
+- restore BuildRoot
+
+  + Thierry Vignaud <tv@mandriva.org>
+    - kill re-definition of %%buildroot on Pixel's request
+
+* Sun Dec 16 2007 Anssi Hannula <anssi@mandriva.org> 0:1.3.4-7.0.2mdv2008.1
++ Revision: 120854
+- buildrequire java-rpmbuild, i.e. build with icedtea on x86(_64)
+
+* Sun Dec 09 2007 Alexander Kurtakov <akurtakov@mandriva.org> 0:1.3.4-7.0.1mdv2008.1
++ Revision: 116771
+- bump release
+- use provided build.xml (sync with jpp)
+
+* Sat Sep 15 2007 Anssi Hannula <anssi@mandriva.org> 0:1.3.4-5.1.2mdv2008.0
++ Revision: 87296
+- rebuild to filter out autorequires of GCJ AOT objects
+- remove unnecessary Requires(post) on java-gcj-compat
+
+* Wed Jul 04 2007 David Walluck <walluck@mandriva.org> 0:1.3.4-5.1.1mdv2008.0
++ Revision: 47910
+- Import concurrent
+
+
+
+* Fri Mar 16 2007 Permaine Cheung <pcheung at redhat.com> - 0:1.3.4-5jpp.1
+- Merge with upstream version, update with the correct src tar ball
+
+* Thu Aug 03 2006 Matt Wringe <mwringe at redhat.com> - 0:1.3.4-4jpp.1
+- Merge with upstream version:
+ - Add missing requires for javadoc task
+ - Add missing postun for javadoc task
+
+* Sun Jul 23 2006 Matt Wringe <mwringe at redhat.com> - 0:1.3.4-3jpp-5fc
+- Rebuilt
+
+* Sun Jul 23 2006 Matt Wringe <mwringe at redhat.com> - 0:1.3.4-3jpp_4fc
+- Rebuilt
+
+* Sat Jul 22 2006 Jakub Jelinek <jakub@redhat.com> - 0:1.3.4-3jpp_3fc
+- Rebuilt
+
+* Thu Jul 20 2006 Matt Wringe <mwringe at redhat.com> - 0:1.3.4-3jpp_2fc
+- Removed vendor and distribution tags
+
+* Thu Jul 20 2006 Matt Wringe <mwringe at redhat.com> - 0:1.3.4-3jpp_1fc
+- Merge with upstream version
+
+* Thu Jul 20 2006 Matt Wringe <mwringe at redhat.com> - 0:1.3.4-3jpp
+- Added conditional native compiling
+
+* Thu Apr 27 2006 Fernando Nasser <fnasser@redhat.com> - 0:1.3.4-2jpp
+- First JPP 1.7 build
+
+* Thu Dec 23 2004 Sebastiano Vigna <vigna@acm.org> 0:1.3.4-1jpp
+- New release.
+
+* Fri Aug 20 2004 Ralph Apel <r.apel at r-apel.de> 0:1.3.2-3jpp
+- Build with ant-1.6.2
+
+* Wed Nov 19 2003 Sebastiano Vigna <vigna@acm.org> 0:1.3.2-2jpp
+- Package name restored to EDU.
+
+* Wed Nov 19 2003 Sebastiano Vigna <vigna@acm.org> 0:1.3.2-1jpp
+- First JPackage version
