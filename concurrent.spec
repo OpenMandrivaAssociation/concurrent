@@ -1,3 +1,4 @@
+%define debug_package %{nil}
 %define _with_gcj_support 1
 
 %define gcj_support %{?_with_gcj_support:1}%{!?_with_gcj_support:%{?_without_gcj_support:0}%{!?_without_gcj_support:%{?_gcj_support:%{_gcj_support}}%{!?_gcj_support:0}}}
