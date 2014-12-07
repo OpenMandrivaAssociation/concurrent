@@ -7,7 +7,7 @@ Summary:        Utility classes for concurrent Java programming
 Name:           concurrent
 Epoch:          0
 Version:        1.3.4
-Release:        14
+Release:        15
 License:        Public Domain
 Url:            http://gee.cs.oswego.edu/dl/classes/EDU/oswego/cs/dl/util/concurrent/intro.html
 Group:          Development/Java
