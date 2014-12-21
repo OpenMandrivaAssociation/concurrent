@@ -1,0 +1,61 @@
+From f61819223b7e6015f31e022793ff030fe3e28717 Mon Sep 17 00:00:00 2001
+From: Marek Goldmann <marek.goldmann@gmail.com>
+Date: Tue, 24 Jun 2014 17:36:53 +0200
+Subject: [PATCH] JDK 8 support
+
+---
+ ConcurrentHashMap.java | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
+
+diff --git a/ConcurrentHashMap.java b/ConcurrentHashMap.java
+index 23a4ed4..3c5f265 100644
+--- a/ConcurrentHashMap.java
++++ b/ConcurrentHashMap.java
+@@ -675,7 +675,7 @@ public class ConcurrentHashMap
+    *               <code>null</code>.
+    */
+ 
+-  protected Object remove(Object key, Object value) {
++  public boolean remove(Object key, Object value) {
+     /*
+       Find the entry, then 
+         1. Set value field to null, to force get() to retry
+@@ -697,7 +697,7 @@ public class ConcurrentHashMap
+ 
+       for (;;) {
+         if (e == null)
+-          return null;
++          return false;
+         if (e.hash == hash && eq(key, e.key)) 
+           break;
+         e = e.next;
+@@ -705,7 +705,7 @@ public class ConcurrentHashMap
+ 
+       Object oldValue = e.value;
+       if (value != null && !value.equals(oldValue))
+-        return null;
++        return false;
+      
+       e.value = null;
+ 
+@@ -714,7 +714,7 @@ public class ConcurrentHashMap
+         head = new Entry(p.hash, p.key, p.value, head);
+       tab[index] = head;
+       seg.count--;
+-      return oldValue;
++      return true;
+     }
+   }
+ 
+@@ -946,7 +946,7 @@ public class ConcurrentHashMap
+       if (!(o instanceof Map.Entry))
+         return false;
+       Map.Entry e = (Map.Entry)o;
+-      return ConcurrentHashMap.this.remove(e.getKey(), e.getValue()) != null;
++      return ConcurrentHashMap.this.remove(e.getKey(), e.getValue()) == true;
+     }
+     public int size() {
+       return ConcurrentHashMap.this.size();
+-- 
+1.9.3
+
