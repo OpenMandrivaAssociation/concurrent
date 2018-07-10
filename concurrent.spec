@@ -31,7 +31,7 @@
 
 Name:           concurrent
 Version:        1.3.4
-Release:        19.2
+Release:        19.3
 Epoch:          0
 Summary:        Utility classes for concurrent Java programming
 License:        Public Domain
