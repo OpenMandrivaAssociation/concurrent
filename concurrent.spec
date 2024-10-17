@@ -41,7 +41,7 @@ Source1:        %{name}-%{version}.build.xml
 Source2:        %{name}-%{version}.pom
 Patch0:         concurrent-build.patch
 Patch1:         JDK-8-support.patch
-URL:            http://gee.cs.oswego.edu/dl/classes/EDU/oswego/cs/dl/util/concurrent/intro.html
+URL:            https://gee.cs.oswego.edu/dl/classes/EDU/oswego/cs/dl/util/concurrent/intro.html
 Group:          Development/Java
 
 BuildArch:      noarch
